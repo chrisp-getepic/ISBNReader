@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html data-ng-app="">
+    <head>
+        <title>ISBN Reader</title>
+    </head>
+    <body>
+        <div data-ng-controller="SimpleController">
+        Title:
+        <br/>
+        <input type="text" data-ng-model="title" /> {{ title }}
+        <br/>
+        <ul>
+            <li data-ng-repeat="book in books | filter:title">Title:{{book.title}} ISBN:{{book.ISBN}}</li>
+        </ul>
+        </div>
+        <script src="Scripts/angular.min.js"></script>
+        <script>
+            function SimpleController($scope) {
+                $scope.books = [
+                    {title:'Book1', ISBN:'1234'},
+                    {title:'Book2', ISBN:'5678'},
+                    {title:'Book3', ISBN:'9012'}
+                ];
+                $scope.url='http://localhost/reg/getBooks.php';
+                $http.post($scope.url, {"title": $scope.title}).
+                 success(function(data, status) { }        
+            }
+        </script>
+    </body>
+</html>
